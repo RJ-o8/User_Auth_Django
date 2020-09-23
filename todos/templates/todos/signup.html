@@ -1,0 +1,16 @@
+{% extends 'todos/base.html' %}
+
+{% block content %}
+
+<h1>Welcome New User</h1>
+<p>Signup here</p>
+
+<h3>{{ error }}</h3> 
+<form action="" method="POST">
+    {% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Sign Up</button>
+</form>
+<p>Or already have an account? <br>Then <a href="{% url 'home' %}">Login</a> </p>
+
+{% endblock %}

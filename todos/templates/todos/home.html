@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body class="container">
+<h1>HOME</h1>
+
+{% if user.is_authenticated %}
+
+    <h3>loged in as {{ user.username }}</h3>
+
+    <form action="{% url 'userlogout' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    <form action="{% url 'currenttodo' %}" method="GET">
+        {% csrf_token %}
+        <button type="submit">My Todos</button>
+    </form>
+
+{% else %}
+    <p>Login here</p>
+
+    <h3>{{ error }}</h3> 
+    <form action="" method="POST">
+        {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account?</p>
+    <p>SignUp here:</p>
+    <a href="{% url 'usersignup' %}">Signup</a>
+
+{% endif %}
+</body>
+</html>
